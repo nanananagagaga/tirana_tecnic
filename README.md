@@ -1,1 +1,0 @@
-# tirana_tecnic
