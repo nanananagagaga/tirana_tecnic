@@ -1,0 +1,140 @@
+[gd_scene load_steps=20 format=3 uid="uid://ye17oojfvwt5"]
+
+[ext_resource type="Script" path="res://escenas/main.gd" id="1_b8k4k"]
+[ext_resource type="PackedScene" uid="uid://8pcts4d0djxr" path="res://escenas/casotas.tscn" id="2_4i1ui"]
+[ext_resource type="PackedScene" uid="uid://dslgmpmdgqeg4" path="res://escenas/char/char.tscn" id="3_cinsf"]
+[ext_resource type="Environment" uid="uid://drj202jr64uxl" path="res://escenas/mapas/env_2.tres" id="4_ax20s"]
+[ext_resource type="Script" path="res://escenas/rot_mundo.gd" id="7_sa54l"]
+[ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="9_6m16a"]
+[ext_resource type="Texture2D" uid="uid://dchkh87v2va8t" path="res://assets/tuto/shet.JPG" id="9_86be1"]
+[ext_resource type="Texture2D" uid="uid://bv01st456dtr6" path="res://assets/shaders/vignette.png" id="9_ryhcq"]
+[ext_resource type="Texture2D" uid="uid://ljqf2isxxo2p" path="res://assets/montain/pngwing.com.png" id="11_q4usq"]
+[ext_resource type="PackedScene" uid="uid://ckc62n47yo2q0" path="res://escenas/luces.tscn" id="12_b15w1"]
+[ext_resource type="PackedScene" uid="uid://bijgddbbt5ufj" path="res://escenas/mapas/arbol.tscn" id="13_kgpfy"]
+[ext_resource type="PackedScene" uid="uid://cb4v4hnmx88q0" path="res://escenas/mapas/world_0.tscn" id="16_mpwyl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2hb5"]
+shader = ExtResource("9_6m16a")
+shader_parameter/screen_size = Vector2(840, 840)
+shader_parameter/viewport_size = Vector2(1920, 1080)
+shader_parameter/hardScan = -8.0
+shader_parameter/hardPix = -3.0
+shader_parameter/warpX = 0.0
+shader_parameter/warpY = 0.0
+shader_parameter/maskDark = 2.0
+shader_parameter/maskLight = 2.0
+shader_parameter/scaleInLinearGamma = true
+shader_parameter/shadowMask = 3
+shader_parameter/brightBoost = 1.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/bloomAmount = 0.15
+shader_parameter/shape = 2.0
+shader_parameter/doBloom = true
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w02u4"]
+
+[sub_resource type="Gradient" id="Gradient_tswgj"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.333333, 0.583333, 0.666667, 0.916667)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_adk3u"]
+gradient = SubResource("Gradient_tswgj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8ul6"]
+albedo_texture = SubResource("GradientTexture1D_adk3u")
+
+[sub_resource type="SphereMesh" id="SphereMesh_1d3r1"]
+material = SubResource("StandardMaterial3D_o8ul6")
+radius = 0.25
+height = 0.5
+radial_segments = 16
+rings = 16
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rdpo2"]
+points = PackedVector3Array(-0.044641, -0.244143, 0.0239466, 0.0469828, 0.2449, 0.00872316, 0.0469281, 0.244608, -0.014176, -0.243407, 0.0458092, -0.00646306, 0.0239222, -0.0304614, -0.242782, 0.175055, -0.0302325, 0.175055, -0.0902994, 0.0304506, 0.229622, 0.222409, -0.068654, -0.0904546, -0.165946, 0.0303547, -0.181124, 0.205974, 0.113777, -0.0823427, -0.0595292, 0.189437, -0.150449, -0.0669086, -0.181435, -0.157602, -0.211259, -0.128917, 0.0086079, -0.0592954, 0.203793, 0.129411, 0.00865449, -0.189575, 0.160362, 0.122602, -0.212689, -0.0444456, 0.13661, 0.150609, 0.14416, -0.164945, -0.105652, 0.152058, -0.150453, 0.189441, -0.0594831, 0.091853, 0.121036, -0.195571, -0.21877, 0.0758073, 0.0920592, 0.221871, -0.0684871, 0.0924321, 0.0087164, 0.0305614, 0.245783, 0.106788, -0.105688, -0.195231, 0.220753, 0.113551, 0.00864479, -0.173079, -0.0681342, -0.165487, 0.12162, -0.18085, 0.121667, 0.0011, -0.076175, 0.237262, 0.168194, 0.0227488, -0.181223, -0.0902103, 0.0760998, -0.21957, -0.157614, -0.181449, -0.0668662, 0.122602, 0.212689, -0.0444456)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_b8k4k")
+
+[node name="casotas" parent="." instance=ExtResource("2_4i1ui")]
+transform = Transform3D(0.590873, 0, 0.806764, 0, 1, 0, -0.806764, 0, 0.590873, -2.86431, -6.35903, -12.4517)
+
+[node name="Prueba" parent="." instance=ExtResource("3_cinsf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, -4.36379, -2.718)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_ax20s")
+script = ExtResource("7_sa54l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.993136, -5.40142e-05, -0.116969, -0.0682342, 0.812488, 0.578971, 0.095005, 0.582978, -0.806914, 0, 10, 0)
+light_color = Color(1, 0.854902, 0.878431, 1)
+light_energy = 0.2
+shadow_enabled = true
+directional_shadow_max_distance = 300.0
+
+[node name="GPUParticles3D" parent="." instance=ExtResource("12_b15w1")]
+transform = Transform3D(0.355488, 0.208816, -0.970527, -1.86173, 0.77158, 0.0879167, 2.26707, 0.600883, 0.224381, 0.79095, 6.47199, -5.53501)
+
+[node name="Control" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.662, 0)
+
+[node name="arbol" parent="Control" instance=ExtResource("13_kgpfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.389246, 0)
+
+[node name="arbol2" parent="Control" instance=ExtResource("13_kgpfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.417, 0.2, 3.921)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_h2hb5")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("PlaceholderTexture2D_w02u4")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("9_ryhcq")
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+offset_left = 94.0
+offset_right = 1830.0
+offset_bottom = 1083.0
+texture = ExtResource("9_86be1")
+
+[node name="world0" parent="." instance=ExtResource("16_mpwyl")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -151.551, -7.83435, 97.5608)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 512
+collision_mask = 513
+mass = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -3.8469, 0)
+mesh = SubResource("SphereMesh_1d3r1")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -3.8469, 0)
+shape = SubResource("ConvexPolygonShape3D_rdpo2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(24.085, 0, 0, 0, 24.085, 0, 0, 0, 24.085, 0, 0, -411.057)
+texture = ExtResource("11_q4usq")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(-23.4341, 0, 5.56161, 0, 24.085, 0, -5.56161, 0, -23.4341, 0, 0, 508.062)
+texture = ExtResource("11_q4usq")

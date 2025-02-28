@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://dslgmpmdgqeg4"]
+
+[ext_resource type="Script" path="res://scripts/prueba/character.gd" id="1_rtdv0"]
+[ext_resource type="Texture2D" uid="uid://uicu7pg48fvw" path="res://assets/sprites/personajes/prueba/64X128_Runing_Free.png" id="2_ee3jp"]
+[ext_resource type="Texture2D" uid="uid://bf1bcr08wk3b1" path="res://assets/cielos/luz2.png" id="3_1ouak"]
+[ext_resource type="CameraAttributesPractical" uid="uid://bp7uwqcl0hi0" path="res://assets/shaders/blur_chr.tres" id="3_p6vwj"]
+[ext_resource type="Script" path="res://scripts/cam_1.gd" id="4_wbp71"]
+[ext_resource type="Script" path="res://scripts/cam_2.gd" id="5_8wb86"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tt0xr"]
+radius = 0.426
+height = 1.8
+
+[node name="Prueba" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, -2.718)
+script = ExtResource("1_rtdv0")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472136, 0)
+layers = 512
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("2_ee3jp")
+hframes = 8
+vframes = 4
+frame = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.524894, 0)
+shape = SubResource("CapsuleShape3D_tt0xr")
+
+[node name="utilidad" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 1, -5)
+top_level = true
+
+[node name="Cam1" type="Camera3D" parent="utilidad"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.34603, 3.12891)
+attributes = ExtResource("3_p6vwj")
+current = true
+script = ExtResource("4_wbp71")
+
+[node name="Cam2" type="Camera3D" parent="utilidad"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.159, 2.583)
+attributes = ExtResource("3_p6vwj")
+script = ExtResource("5_8wb86")
+camera_distance = 10.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.476315, 0.879275, 0, -0.879275, 0.476315, 0, 1.44777, 0.428411)
+light_color = Color(1, 0.956863, 0.776471, 1)
+light_energy = 0.1
+light_cull_mask = 4294966784
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0153167, 0.122685)
+size = Vector3(1, 1.8, 0.5)
+texture_albedo = ExtResource("3_1ouak")
+modulate = Color(0, 0, 0, 1)
+normal_fade = 0.999
+upper_fade = 0.0588438
+distance_fade_enabled = true
+distance_fade_begin = 0.5
+distance_fade_length = 15.0
+cull_mask = 1048063

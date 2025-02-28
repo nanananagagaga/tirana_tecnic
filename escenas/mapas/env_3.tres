@@ -1,0 +1,38 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dimbc2wtigm56"]
+
+[ext_resource type="Texture2D" uid="uid://b87eawkw5dgnv" path="res://assets/cielos/Stylized Sky BG (55).png" id="1_bwsvy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dtxth"]
+panorama = ExtResource("1_bwsvy")
+energy_multiplier = 0.6
+
+[sub_resource type="Sky" id="Sky_h3avq"]
+sky_material = SubResource("PanoramaSkyMaterial_dtxth")
+radiance_size = 1
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.6
+sky = SubResource("Sky_h3avq")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.1
+ssr_fade_in = 0.252269
+ssr_fade_out = 1.8025
+ssao_enabled = true
+ssil_enabled = true
+ssil_radius = 5.24
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.13
+glow_blend_mode = 0
+fog_light_color = Color(0.129627, 0.013351, 0.00709503, 1)
+fog_sun_scatter = 0.31
+fog_density = 0.1497
+volumetric_fog_density = 0.01
+adjustment_enabled = true
+adjustment_brightness = 0.95
+adjustment_contrast = 1.06
+adjustment_saturation = 1.53

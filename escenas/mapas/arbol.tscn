@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bijgddbbt5ufj"]
+
+[ext_resource type="Texture2D" uid="uid://bmxkwu81tek8g" path="res://assets/sprites/mapas/arbol3.png" id="1_nnd2u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjh31"]
+
+[node name="arbol" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02897, -0.787928, 0)
+shape = SubResource("BoxShape3D_jjh31")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_nnd2u")

@@ -1,0 +1,157 @@
+[gd_scene load_steps=23 format=3 uid="uid://ye17oojfvwt5"]
+
+[ext_resource type="Texture2D" uid="uid://cidbh1nwv7lgi" path="res://assets/sprites/mapas/prueba/completesheet.png" id="1_316m3"]
+[ext_resource type="Script" path="res://escenas/main.gd" id="1_b8k4k"]
+[ext_resource type="Texture2D" uid="uid://curqkiymbode8" path="res://assets/sprites/mapas/prueba/prueba_muralla.png" id="1_jnn75"]
+[ext_resource type="Texture2D" uid="uid://bkw5twfp3q7yt" path="res://assets/sprites/mapas/prueba/completesheet_n.png" id="2_nhvmj"]
+[ext_resource type="Script" path="res://scripts/prueba/character.gd" id="2_y0am0"]
+[ext_resource type="Texture2D" uid="uid://uicu7pg48fvw" path="res://assets/sprites/personajes/prueba/64X128_Runing_Free.png" id="4_dhxiu"]
+[ext_resource type="Texture2D" uid="uid://bp6l43cma0yep" path="res://assets/cielos/Stylized Sky BG (71).png" id="5_sc3bn"]
+[ext_resource type="Script" path="res://escenas/rot_mundo.gd" id="7_sa54l"]
+[ext_resource type="Texture2D" uid="uid://bmxkwu81tek8g" path="res://assets/sprites/mapas/arbol3.png" id="8_x7yja"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c1i8"]
+albedo_texture = ExtResource("1_jnn75")
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(0, 1.53, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e5ii0"]
+material = SubResource("StandardMaterial3D_5c1i8")
+size = Vector3(8, 10, 6)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_61e46"]
+data = PackedVector3Array(4, 0, 3, -4, 0, 3, 4, 0, -3, -4, 0, 3, -4, 0, -3, 4, 0, -3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3ec2"]
+albedo_texture = ExtResource("1_jnn75")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4n5f"]
+material = SubResource("StandardMaterial3D_r3ec2")
+size = Vector2(8, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fik6y"]
+albedo_texture = ExtResource("1_316m3")
+normal_enabled = true
+normal_scale = 1.35
+normal_texture = ExtResource("2_nhvmj")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mi2c5"]
+material = SubResource("StandardMaterial3D_fik6y")
+size = Vector2(100, 80)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ccnmh"]
+data = PackedVector3Array(5, 0, 4, -5, 0, 4, 5, 0, -4, -5, 0, 4, -5, 0, -4, 5, 0, -4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3glaq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bs10c"]
+panorama = ExtResource("5_sc3bn")
+
+[sub_resource type="Sky" id="Sky_7rmfe"]
+sky_material = SubResource("PanoramaSkyMaterial_bs10c")
+
+[sub_resource type="Environment" id="Environment_wj57a"]
+background_mode = 2
+sky = SubResource("Sky_7rmfe")
+sky_custom_fov = 35.7
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.55
+reflected_light_source = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjh31"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_b8k4k")
+
+[node name="muralla" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.000394826, 1, -0.000619969, -0.000151816, -0.000619905, -1, -1, 0.000394925, 0.000151557, -10, 1, -1.348)
+mesh = SubResource("BoxMesh_e5ii0")
+skeleton = NodePath("../PISO")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="muralla"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="muralla/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_61e46")
+
+[node name="muralla2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -0.000394881, -0.000151557, -0.000151816, -0.000619905, -1, 0.000394732, 1, -0.000619969, 3.626, 1, -4.348)
+mesh = SubResource("PlaneMesh_g4n5f")
+skeleton = NodePath("../PISO")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="muralla2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="muralla2/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_61e46")
+
+[node name="PISO" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_mi2c5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PISO"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PISO/StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_ccnmh")
+
+[node name="Prueba" type="CharacterBody3D" parent="."]
+script = ExtResource("2_y0am0")
+
+[node name="Sprite3D" type="Sprite3D" parent="Prueba"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47559, 0)
+layers = 513
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("4_dhxiu")
+hframes = 8
+vframes = 4
+frame = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prueba"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.30622, 0)
+shape = SubResource("BoxShape3D_3glaq")
+
+[node name="utilidad" type="Node3D" parent="Prueba"]
+top_level = true
+
+[node name="Cam1" type="Camera3D" parent="Prueba/utilidad"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.34603, 3.12891)
+
+[node name="Cam2" type="Camera3D" parent="Prueba/utilidad"]
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 3.45602, 5.80283)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Prueba"]
+transform = Transform3D(1, 0, 0, 0, 0.476315, 0.879275, 0, -0.879275, 0.476315, 0, 1.44777, 0.428411)
+light_color = Color(1, 0.956863, 0.776471, 1)
+light_energy = 0.4
+light_cull_mask = 4294966784
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wj57a")
+script = ExtResource("7_sa54l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.993136, -5.40327e-05, -0.116969, -0.0682342, 0.812488, 0.578971, 0.095005, 0.582978, -0.806915, 0, 10, 0)
+light_color = Color(1, 0.854902, 0.878431, 1)
+light_energy = 0.4
+light_angular_distance = 0.5
+shadow_enabled = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="arbol" type="StaticBody3D" parent="Control"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control/arbol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02897, 0.650334, 0)
+shape = SubResource("BoxShape3D_jjh31")
+
+[node name="Sprite3D" type="Sprite3D" parent="Control/arbol/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553865, 0)
+billboard = 1
+alpha_cut = 2
+texture = ExtResource("8_x7yja")
